@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Session1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Абонент">
+    <Key>
+      <PropertyRef Name="ID_Абонента" />
+    </Key>
+    <Property Name="ID_Абонента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="НомерАбонента" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Фамилия" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Имя" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Отчество" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Пол" Type="nchar" MaxLength="7" Nullable="false" />
+    <Property Name="Дата_Рождения" Type="date" Nullable="false" />
+    <Property Name="Номер_телефона" Type="nchar" MaxLength="12" Nullable="false" />
+    <Property Name="Электорнная_почта" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Адрес_проживания" Type="nchar" MaxLength="70" Nullable="false" />
+    <Property Name="Серия_номер_паспорта" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ВидУслуг">
+    <Key>
+      <PropertyRef Name="ID_ВидУслуг" />
+    </Key>
+    <Property Name="ID_ВидУслуг" Type="int" Nullable="false" />
+    <Property Name="Название_услуги" Type="nchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Заявки">
+    <Key>
+      <PropertyRef Name="ID_Заявки" />
+    </Key>
+    <Property Name="ID_Заявки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Номер_заявки" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Дата_создания" Type="date" Nullable="false" />
+    <Property Name="ЛС" Type="int" Nullable="false" />
+    <Property Name="Услуга" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="Вид_услуги" Type="int" Nullable="false" />
+    <Property Name="Тип_услуги" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="Статус" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="ID_Оборудования" Type="int" Nullable="false" />
+    <Property Name="Проблемы" Type="nchar" MaxLength="10" />
+    <Property Name="Дата_закрытия" Type="date" />
+    <Property Name="Тип_проблемы" Type="nchar" MaxLength="10" />
+    <Property Name="ID_Сотрудника" Type="int" Nullable="false" />
+    <Property Name="ID_района" Type="int" Nullable="false" />
+    <Property Name="ID_Абонента" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Оборудование">
+    <Key>
+      <PropertyRef Name="ID_Оборудования" />
+    </Key>
+    <Property Name="ID_Оборудования" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование_оборудования" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Тип_оборудования" Type="int" Nullable="false" />
+    <Property Name="Серийный_номер" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="MAC" Type="nchar" MaxLength="12" Nullable="false" />
+    <Property Name="IP" Type="nchar" MaxLength="12" Nullable="false" />
+    <Property Name="Номер_телефонов" Type="nchar" MaxLength="12" Nullable="false" />
+    <Property Name="Дата_установки" Type="date" Nullable="false" />
+    <Property Name="Место_подключения" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Порты">
+    <Key>
+      <PropertyRef Name="ID_Порта" />
+    </Key>
+    <Property Name="ID_Порта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Тип_порта" Type="nchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Порты_В_Оборудовании">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_порта" Type="int" Nullable="false" />
+    <Property Name="ID_оборудования" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Районы">
+    <Key>
+      <PropertyRef Name="ID_района" />
+    </Key>
+    <Property Name="ID_района" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Название" Type="nchar" MaxLength="40" Nullable="false" />
+    <Property Name="Площадь" Type="float" Nullable="false" />
+    <Property Name="Население" Type="int" Nullable="false" />
+    <Property Name="Колличество_станций_метро" Type="int" Nullable="false" />
+    <Property Name="Тип_застройки" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ТехПерсонал">
+    <Key>
+      <PropertyRef Name="ID_Сотрудника" />
+    </Key>
+    <Property Name="ID_Сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Фамилия" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Имя" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Отчество" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Должность" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ТипОборудования">
+    <Key>
+      <PropertyRef Name="ID_Типа" />
+    </Key>
+    <Property Name="ID_Типа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование_типа" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ТочкаПодключения">
+    <Key>
+      <PropertyRef Name="ID_ТочкиПодключения" />
+    </Key>
+    <Property Name="ID_ТочкиПодключения" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Координаты" Type="geography" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Заявки_Абонент">
+    <End Role="Абонент" Type="Self.Абонент" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Абонент">
+        <PropertyRef Name="ID_Абонента" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="ID_Абонента" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_ВидУслуг">
+    <End Role="ВидУслуг" Type="Self.ВидУслуг" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ВидУслуг">
+        <PropertyRef Name="ID_ВидУслуг" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="Вид_услуги" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_Оборудование">
+    <End Role="Оборудование" Type="Self.Оборудование" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Оборудование">
+        <PropertyRef Name="ID_Оборудования" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="ID_Оборудования" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_Районы">
+    <End Role="Районы" Type="Self.Районы" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Районы">
+        <PropertyRef Name="ID_района" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="ID_района" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_ТехПерсонал">
+    <End Role="ТехПерсонал" Type="Self.ТехПерсонал" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ТехПерсонал">
+        <PropertyRef Name="ID_Сотрудника" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="ID_Сотрудника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Оборудование_ТипОборудования">
+    <End Role="ТипОборудования" Type="Self.ТипОборудования" Multiplicity="1" />
+    <End Role="Оборудование" Type="Self.Оборудование" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ТипОборудования">
+        <PropertyRef Name="ID_Типа" />
+      </Principal>
+      <Dependent Role="Оборудование">
+        <PropertyRef Name="Тип_оборудования" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Оборудование_ТочкаПодключения">
+    <End Role="ТочкаПодключения" Type="Self.ТочкаПодключения" Multiplicity="1" />
+    <End Role="Оборудование" Type="Self.Оборудование" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ТочкаПодключения">
+        <PropertyRef Name="ID_ТочкиПодключения" />
+      </Principal>
+      <Dependent Role="Оборудование">
+        <PropertyRef Name="Место_подключения" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Порты_В_Оборудовании_Оборудование">
+    <End Role="Оборудование" Type="Self.Оборудование" Multiplicity="1" />
+    <End Role="Порты_В_Оборудовании" Type="Self.Порты_В_Оборудовании" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Оборудование">
+        <PropertyRef Name="ID_Оборудования" />
+      </Principal>
+      <Dependent Role="Порты_В_Оборудовании">
+        <PropertyRef Name="ID_оборудования" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Порты_В_Оборудовании_Порты">
+    <End Role="Порты" Type="Self.Порты" Multiplicity="1" />
+    <End Role="Порты_В_Оборудовании" Type="Self.Порты_В_Оборудовании" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Порты">
+        <PropertyRef Name="ID_Порта" />
+      </Principal>
+      <Dependent Role="Порты_В_Оборудовании">
+        <PropertyRef Name="ID_порта" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище Session1ModelContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Абонент" EntityType="Self.Абонент" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ВидУслуг" EntityType="Self.ВидУслуг" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Заявки" EntityType="Self.Заявки" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Оборудование" EntityType="Self.Оборудование" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Порты" EntityType="Self.Порты" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Порты_В_Оборудовании" EntityType="Self.Порты_В_Оборудовании" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Районы" EntityType="Self.Районы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ТехПерсонал" EntityType="Self.ТехПерсонал" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ТипОборудования" EntityType="Self.ТипОборудования" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ТочкаПодключения" EntityType="Self.ТочкаПодключения" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Заявки_Абонент" Association="Self.FK_Заявки_Абонент">
+      <End Role="Абонент" EntitySet="Абонент" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_ВидУслуг" Association="Self.FK_Заявки_ВидУслуг">
+      <End Role="ВидУслуг" EntitySet="ВидУслуг" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_Оборудование" Association="Self.FK_Заявки_Оборудование">
+      <End Role="Оборудование" EntitySet="Оборудование" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_Районы" Association="Self.FK_Заявки_Районы">
+      <End Role="Районы" EntitySet="Районы" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_ТехПерсонал" Association="Self.FK_Заявки_ТехПерсонал">
+      <End Role="ТехПерсонал" EntitySet="ТехПерсонал" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Оборудование_ТипОборудования" Association="Self.FK_Оборудование_ТипОборудования">
+      <End Role="ТипОборудования" EntitySet="ТипОборудования" />
+      <End Role="Оборудование" EntitySet="Оборудование" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Оборудование_ТочкаПодключения" Association="Self.FK_Оборудование_ТочкаПодключения">
+      <End Role="ТочкаПодключения" EntitySet="ТочкаПодключения" />
+      <End Role="Оборудование" EntitySet="Оборудование" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Порты_В_Оборудовании_Оборудование" Association="Self.FK_Порты_В_Оборудовании_Оборудование">
+      <End Role="Оборудование" EntitySet="Оборудование" />
+      <End Role="Порты_В_Оборудовании" EntitySet="Порты_В_Оборудовании" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Порты_В_Оборудовании_Порты" Association="Self.FK_Порты_В_Оборудовании_Порты">
+      <End Role="Порты" EntitySet="Порты" />
+      <End Role="Порты_В_Оборудовании" EntitySet="Порты_В_Оборудовании" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

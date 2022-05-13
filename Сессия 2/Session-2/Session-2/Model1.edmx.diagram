@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="edcf28ca77c74d8e9323a41cbdc38425" Name="Diagram1">
+        <EntityTypeShape EntityType="Session1Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.Абонент" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.ВидУслуг" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.Заявки" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.Оборудование" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.Порты" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.Порты_В_Оборудовании" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.Районы" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.ТехПерсонал" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.ТипОборудования" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session1Model.ТочкаПодключения" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="Session1Model.FK_Заявки_Абонент" ManuallyRouted="false" />
+        <AssociationConnector Association="Session1Model.FK_Заявки_ВидУслуг" ManuallyRouted="false" />
+        <AssociationConnector Association="Session1Model.FK_Заявки_Оборудование" ManuallyRouted="false" />
+        <AssociationConnector Association="Session1Model.FK_Заявки_Районы" ManuallyRouted="false" />
+        <AssociationConnector Association="Session1Model.FK_Заявки_ТехПерсонал" ManuallyRouted="false" />
+        <AssociationConnector Association="Session1Model.FK_Оборудование_ТипОборудования" ManuallyRouted="false" />
+        <AssociationConnector Association="Session1Model.FK_Оборудование_ТочкаПодключения" ManuallyRouted="false" />
+        <AssociationConnector Association="Session1Model.FK_Порты_В_Оборудовании_Оборудование" ManuallyRouted="false" />
+        <AssociationConnector Association="Session1Model.FK_Порты_В_Оборудовании_Порты" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

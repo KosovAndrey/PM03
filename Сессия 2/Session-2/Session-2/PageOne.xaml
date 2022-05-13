@@ -1,0 +1,46 @@
+﻿<Page x:Class="Session_2.PageOne"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Session_2"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="420"
+      Title="PageOne">
+    <Grid>
+        <DataGrid x:Name="DGridOne">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Фамилия" 
+                    Binding="{Binding Surname}" 
+                    Width="60">
+                </DataGridTextColumn>
+                <DataGridTextColumn 
+                    Header="Имя" 
+                    Binding="{Binding Name}" 
+                    Width="35">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Отчество" 
+                    Binding="{Binding Lastname}"
+                    Width="61">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Абоненский номер"
+                    Binding="{Binding NumberAbonent}" 
+                    Width="121">
+                </DataGridTextColumn>
+                <DataGridTextColumn 
+                    Header="Лицевой счет"
+                    Binding="{Binding PersonalAccount }"
+                    Width="87">
+                </DataGridTextColumn>
+                <DataGridTextColumn 
+                    Header="Услуги"
+                    Binding="{Binding Services}" 
+                    Width="50">
+                </DataGridTextColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
