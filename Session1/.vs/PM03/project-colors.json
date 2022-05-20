@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "266aa6c9-c0af-4031-ba48-e1c1f92bed41": {
+      "ProjectGuid": "266aa6c9-c0af-4031-ba48-e1c1f92bed41",
+      "DisplayName": "Uchet",
+      "ColorIndex": 0
+    },
+    "46ecf087-8694-4b4b-aada-efa3d8087a47": {
+      "ProjectGuid": "46ecf087-8694-4b4b-aada-efa3d8087a47",
+      "DisplayName": "Uchet2-5",
+      "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Прочие файлы",
+      "ColorIndex": -1
+    },
+    "377e5d05-e8b5-43f3-a724-4c50723dc95b": {
+      "ProjectGuid": "377e5d05-e8b5-43f3-a724-4c50723dc95b",
+      "DisplayName": "Uchet",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

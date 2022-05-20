@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище UchetModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="PoinAddress" />
+          </Key>
+          <Property Name="PoinAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Home" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConnectionPoint">
+          <Key>
+            <PropertyRef Name="PointID" />
+          </Key>
+          <Property Name="PointID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PointAddress" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="SerialNumber" />
+          </Key>
+          <Property Name="NameOfTheEquipment" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MavAddress" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentAtThePoint">
+          <Key>
+            <PropertyRef Name="EATP_ID" />
+          </Key>
+          <Property Name="EATP_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="PointID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateOfInstallation" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HardwarePorts">
+          <Key>
+            <PropertyRef Name="RecordOfPort" />
+          </Key>
+          <Property Name="RecordOfPort" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Port" Type="int" Nullable="false" />
+          <Property Name="TypeOfPort" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fam_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="F_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="L_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PersonalAccount" Type="varchar" MaxLength="90" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ConnectionPoint_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="ConnectionPoint" Type="Self.ConnectionPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="PoinAddress" />
+            </Principal>
+            <Dependent Role="ConnectionPoint">
+              <PropertyRef Name="PointAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentAtThePoint_ConnectionPoint">
+          <End Role="ConnectionPoint" Type="Self.ConnectionPoint" Multiplicity="1" />
+          <End Role="EquipmentAtThePoint" Type="Self.EquipmentAtThePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConnectionPoint">
+              <PropertyRef Name="PointID" />
+            </Principal>
+            <Dependent Role="EquipmentAtThePoint">
+              <PropertyRef Name="PointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentAtThePoint_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentAtThePoint" Type="Self.EquipmentAtThePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="SerialNumber" />
+            </Principal>
+            <Dependent Role="EquipmentAtThePoint">
+              <PropertyRef Name="SerialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HardwarePorts_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="HardwarePorts" Type="Self.HardwarePorts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="SerialNumber" />
+            </Principal>
+            <Dependent Role="HardwarePorts">
+              <PropertyRef Name="SerialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HardwarePorts_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="HardwarePorts" Type="Self.HardwarePorts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="HardwarePorts">
+              <PropertyRef Name="Login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище UchetModelContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConnectionPoint" EntityType="Self.ConnectionPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentAtThePoint" EntityType="Self.EquipmentAtThePoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HardwarePorts" EntityType="Self.HardwarePorts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ConnectionPoint_Address" Association="Self.FK_ConnectionPoint_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="ConnectionPoint" EntitySet="ConnectionPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentAtThePoint_ConnectionPoint" Association="Self.FK_EquipmentAtThePoint_ConnectionPoint">
+            <End Role="ConnectionPoint" EntitySet="ConnectionPoint" />
+            <End Role="EquipmentAtThePoint" EntitySet="EquipmentAtThePoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentAtThePoint_Equipment" Association="Self.FK_EquipmentAtThePoint_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentAtThePoint" EntitySet="EquipmentAtThePoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HardwarePorts_Equipment" Association="Self.FK_HardwarePorts_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="HardwarePorts" EntitySet="HardwarePorts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HardwarePorts_User" Association="Self.FK_HardwarePorts_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="HardwarePorts" EntitySet="HardwarePorts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UchetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="PoinAddress" />
+          </Key>
+          <Property Name="PoinAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Home" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ConnectionPoint" Relationship="Self.FK_ConnectionPoint_Address" FromRole="Address" ToRole="ConnectionPoint" />
+        </EntityType>
+        <EntityType Name="ConnectionPoint">
+          <Key>
+            <PropertyRef Name="PointID" />
+          </Key>
+          <Property Name="PointID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PointAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_ConnectionPoint_Address" FromRole="ConnectionPoint" ToRole="Address" />
+          <NavigationProperty Name="EquipmentAtThePoint" Relationship="Self.FK_EquipmentAtThePoint_ConnectionPoint" FromRole="ConnectionPoint" ToRole="EquipmentAtThePoint" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="SerialNumber" />
+          </Key>
+          <Property Name="NameOfTheEquipment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MavAddress" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EquipmentAtThePoint" Relationship="Self.FK_EquipmentAtThePoint_Equipment" FromRole="Equipment" ToRole="EquipmentAtThePoint" />
+          <NavigationProperty Name="HardwarePorts" Relationship="Self.FK_HardwarePorts_Equipment" FromRole="Equipment" ToRole="HardwarePorts" />
+        </EntityType>
+        <EntityType Name="EquipmentAtThePoint">
+          <Key>
+            <PropertyRef Name="EATP_ID" />
+          </Key>
+          <Property Name="EATP_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PointID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfInstallation" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ConnectionPoint" Relationship="Self.FK_EquipmentAtThePoint_ConnectionPoint" FromRole="EquipmentAtThePoint" ToRole="ConnectionPoint" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK_EquipmentAtThePoint_Equipment" FromRole="EquipmentAtThePoint" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="HardwarePorts">
+          <Key>
+            <PropertyRef Name="RecordOfPort" />
+          </Key>
+          <Property Name="RecordOfPort" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Port" Type="Int32" Nullable="false" />
+          <Property Name="TypeOfPort" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK_HardwarePorts_Equipment" FromRole="HardwarePorts" ToRole="Equipment" />
+          <NavigationProperty Name="User" Relationship="Self.FK_HardwarePorts_User" FromRole="HardwarePorts" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fam_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="F_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="L_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonalAccount" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HardwarePorts" Relationship="Self.FK_HardwarePorts_User" FromRole="User" ToRole="HardwarePorts" />
+        </EntityType>
+        <Association Name="FK_ConnectionPoint_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="ConnectionPoint" Type="Self.ConnectionPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="PoinAddress" />
+            </Principal>
+            <Dependent Role="ConnectionPoint">
+              <PropertyRef Name="PointAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentAtThePoint_ConnectionPoint">
+          <End Role="ConnectionPoint" Type="Self.ConnectionPoint" Multiplicity="1" />
+          <End Role="EquipmentAtThePoint" Type="Self.EquipmentAtThePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConnectionPoint">
+              <PropertyRef Name="PointID" />
+            </Principal>
+            <Dependent Role="EquipmentAtThePoint">
+              <PropertyRef Name="PointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentAtThePoint_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentAtThePoint" Type="Self.EquipmentAtThePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="SerialNumber" />
+            </Principal>
+            <Dependent Role="EquipmentAtThePoint">
+              <PropertyRef Name="SerialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HardwarePorts_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="HardwarePorts" Type="Self.HardwarePorts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="SerialNumber" />
+            </Principal>
+            <Dependent Role="HardwarePorts">
+              <PropertyRef Name="SerialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HardwarePorts_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="HardwarePorts" Type="Self.HardwarePorts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="HardwarePorts">
+              <PropertyRef Name="Login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UchetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="Self.Address" />
+          <EntitySet Name="ConnectionPoint" EntityType="Self.ConnectionPoint" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="EquipmentAtThePoint" EntityType="Self.EquipmentAtThePoint" />
+          <EntitySet Name="HardwarePorts" EntityType="Self.HardwarePorts" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_ConnectionPoint_Address" Association="Self.FK_ConnectionPoint_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="ConnectionPoint" EntitySet="ConnectionPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentAtThePoint_ConnectionPoint" Association="Self.FK_EquipmentAtThePoint_ConnectionPoint">
+            <End Role="ConnectionPoint" EntitySet="ConnectionPoint" />
+            <End Role="EquipmentAtThePoint" EntitySet="EquipmentAtThePoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentAtThePoint_Equipment" Association="Self.FK_EquipmentAtThePoint_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentAtThePoint" EntitySet="EquipmentAtThePoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HardwarePorts_Equipment" Association="Self.FK_HardwarePorts_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="HardwarePorts" EntitySet="HardwarePorts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HardwarePorts_User" Association="Self.FK_HardwarePorts_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="HardwarePorts" EntitySet="HardwarePorts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UchetModelContainer" CdmEntityContainer="UchetEntities">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="UchetModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="PoinAddress" ColumnName="PoinAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Home" ColumnName="Home" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConnectionPoint">
+            <EntityTypeMapping TypeName="UchetModel.ConnectionPoint">
+              <MappingFragment StoreEntitySet="ConnectionPoint">
+                <ScalarProperty Name="PointID" ColumnName="PointID" />
+                <ScalarProperty Name="PointAddress" ColumnName="PointAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="UchetModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="NameOfTheEquipment" ColumnName="NameOfTheEquipment" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="MavAddress" ColumnName="MavAddress" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentAtThePoint">
+            <EntityTypeMapping TypeName="UchetModel.EquipmentAtThePoint">
+              <MappingFragment StoreEntitySet="EquipmentAtThePoint">
+                <ScalarProperty Name="EATP_ID" ColumnName="EATP_ID" />
+                <ScalarProperty Name="PointID" ColumnName="PointID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DateOfInstallation" ColumnName="DateOfInstallation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HardwarePorts">
+            <EntityTypeMapping TypeName="UchetModel.HardwarePorts">
+              <MappingFragment StoreEntitySet="HardwarePorts">
+                <ScalarProperty Name="RecordOfPort" ColumnName="RecordOfPort" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="TypeOfPort" ColumnName="TypeOfPort" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="UchetModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Fam_Name" ColumnName="Fam_Name" />
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+                <ScalarProperty Name="L_Name" ColumnName="L_Name" />
+                <ScalarProperty Name="PersonalAccount" ColumnName="PersonalAccount" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
